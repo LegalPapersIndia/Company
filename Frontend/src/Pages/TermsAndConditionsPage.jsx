@@ -27,7 +27,7 @@ export default function TermsAndConditionsPage() {
               1. About Us
             </h2>
             <p>
-              RegiFast is a private consultancy platform assisting entrepreneurs
+              IncoFast is a private consultancy platform assisting entrepreneurs
               with company incorporation services. We are not affiliated with
               the Ministry of Corporate Affairs (MCA) or any government body.
             </p>
@@ -68,7 +68,7 @@ export default function TermsAndConditionsPage() {
           {/* Agreement */}
           <div className="pt-6 border-t border-gray-200 text-center">
             <p className="text-gray-500 text-sm">
-              By using RegiFast services, you agree to these Terms & Conditions.
+              By using IncoFast services, you agree to these Terms & Conditions.
             </p>
           </div>
 

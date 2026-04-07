@@ -45,7 +45,7 @@ export default function ContactPage() {
             </div>
 
             <h3 className="text-2xl font-semibold text-blue-700 mb-2">Email Us</h3>
-            <p className="text-gray-700 text-lg break-all">info@regifast.in</p>
+            <p className="text-gray-700 text-lg break-all">info@incofast.in</p>
             <p className="text-gray-500 text-sm mt-2">We reply within 2-4 hours</p>
           </div>
 

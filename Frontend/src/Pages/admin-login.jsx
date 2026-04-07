@@ -60,7 +60,7 @@ const res = await fetch(`${API_URL}/api/admin/login`, {
             Admin Login
           </h2>
           <p className="text-slate-500 text-sm mt-2">
-            Secure access to RegiFast Dashboard
+            Secure access to IncoFast Dashboard
           </p>
         </div>
 
@@ -106,7 +106,7 @@ const res = await fetch(`${API_URL}/api/admin/login`, {
 
         {/* Footer Note */}
         <p className="text-center text-slate-400 text-xs mt-8">
-          Protected Admin Access • RegiFast
+          Protected Admin Access • IncoFast
         </p>
 
       </div>

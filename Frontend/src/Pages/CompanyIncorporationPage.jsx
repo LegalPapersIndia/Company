@@ -165,7 +165,7 @@ const res = await fetch(`${API_URL}/api/leads/submit`, {
             Company Incorporation
           </h1>
           <p className="text-slate-600 mt-4 text-lg">
-            Register your {formData.applicationType} in just 7 days with expert support
+            Register your {formData.applicationType} in just 5 days with expert support
           </p>
         </div>
 

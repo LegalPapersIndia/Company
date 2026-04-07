@@ -23,7 +23,7 @@ const Hero = () => {
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight text-gray-900">
             Register Your Dream Company <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-gray-400">
-              in Just 7 Days
+              in Just 5 Days
             </span>
           </h1>
 

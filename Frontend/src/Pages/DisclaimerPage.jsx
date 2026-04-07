@@ -37,7 +37,7 @@ export default function DisclaimerPage() {
 
             {/* Paragraphs */}
             <p>
-              RegiFast provides professional assistance and guidance for Company
+              IncoFast provides professional assistance and guidance for Company
               Incorporation including Private Limited, LLP, OPC, Section 8 and
               Partnership firms. The fees charged are purely for consultancy and
               professional services.
@@ -76,7 +76,7 @@ export default function DisclaimerPage() {
 
         {/* Bottom Note */}
         <div className="text-center mt-10 text-gray-500 text-sm">
-          © {new Date().getFullYear()} RegiFast. All rights reserved.
+          © {new Date().getFullYear()} IncoFast. All rights reserved.
         </div>
 
       </div>
