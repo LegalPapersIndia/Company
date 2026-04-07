@@ -2,9 +2,45 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const states = [
-  "Uttar Pradesh","Maharashtra","Delhi","Gujarat","Karnataka",
-  "Tamil Nadu","Rajasthan","Haryana","Punjab","Bihar","West Bengal"
+  "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+"Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
+"Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur",
+"Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab",
+"Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
+"Uttar Pradesh", "Uttarakhand", "West Bengal",
+"Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu",
+"Delhi", "Jammu and Kashmir", "Ladakh", "Lakshadweep", "Puducherry"
 ];
+
+const companyTypes = [
+  "Private Limited Company",
+  "One Person Company (OPC)",
+  "Limited Liability Partnership (LLP)",
+  "Partnership Firm",
+  "Section 8 Company"
+];
+
+const natureOfBusinessOptions = [
+  "Manufacturer Exporter",
+  "Merchant Exporter",
+  "Merchant cum Manufacturer Exporter",
+  "Service Provider",
+  "Merchant cum Service Provider",
+  "Manufacturer cum Service Provider",
+  "Merchant cum Manufacturer cum Service Provider",
+  "Others"
+];
+
+const initialCapitalOptions = [
+  "₹ 0 - 1 Lakh",
+  "₹ 1 Lakh - 5 Lakhs",
+  "₹ 5 Lakhs - 10 Lakhs",
+  "₹ 10 Lakhs - 25 Lakhs",
+  "₹ 25 Lakhs - 1 Crore",
+  "More than ₹ 1 Crore"
+];
+
+const numberOfDirectorsOptions = ["1","2", "3", "4", "5", "6", "7", "8", "9", "10"];
 
 export default function CompanyIncorporationPage() {
   const { type } = useParams();
@@ -13,7 +49,7 @@ export default function CompanyIncorporationPage() {
   const [formData, setFormData] = useState({
     applicationType: type
       ? type.replace(/-/g, " ").replace(/\b\w/g, l => l.toUpperCase())
-      : "",
+      : "Private Limited Company", // Default if no type in URL
     fullName: "",
     mobile: "",
     email: "",
@@ -22,8 +58,8 @@ export default function CompanyIncorporationPage() {
     companyName: "",
     state: "",
     address1: "",
-    members: "2",
-    investment: "0-10 Lakhs",
+    members: "2",                    // Now using as Number of Directors
+    investment: "₹ 0 - 1 Lakh",      // Changed label to Initial Capital
   });
 
   const [errors, setErrors] = useState({});
@@ -51,13 +87,14 @@ export default function CompanyIncorporationPage() {
       newErrors.mobile = "Valid 10 digit number required";
     if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email))
       newErrors.email = "Valid email required";
-    if (!formData.natureOfBusiness.trim())
+    if (!formData.natureOfBusiness)
       newErrors.natureOfBusiness = "Required";
     if (!formData.companyName.trim())
       newErrors.companyName = "Required";
     if (!formData.state) newErrors.state = "Required";
     if (!formData.address1.trim())
       newErrors.address1 = "Required";
+    if (!formData.members) newErrors.members = "Required";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -131,110 +168,139 @@ export default function CompanyIncorporationPage() {
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="p-8 space-y-6">
-
-            {/* Progress */}
+            {/* Company Type - Now Dropdown */}
             <div>
-              <div className="w-full h-2 bg-white/10 rounded-full overflow-hidden">
-                <div className="w-1/3 h-full bg-gradient-to-r from-blue-500 to-cyan-400 animate-pulse"></div>
-              </div>
-              <p className="text-xs text-gray-400 mt-1">Step 1 of 3</p>
+              <label className="text-gray-400 text-sm block mb-1">Company Type *</label>
+              <select 
+                name="applicationType" 
+                value={formData.applicationType}
+                onChange={handleChange}
+                className="w-full px-4 py-3 rounded-xl bg-[#0F172A]/80 border border-white/10 text-white focus:ring-2 focus:ring-cyan-400 appearance-none"
+              >
+                {companyTypes.map((ct) => (
+                  <option key={ct} value={ct}>{ct}</option>
+                ))}
+              </select>
             </div>
 
-            {/* Company Type */}
-            <div>
-              <label className="text-gray-400 text-sm">Company Type</label>
-              <div className="mt-1 px-4 py-3 rounded-xl bg-[#0F172A]/80 border border-white/10 text-white">
-                {formData.applicationType}
-              </div>
-            </div>
-
-            {/* Inputs */}
+            {/* Personal Details */}
             <div className="grid md:grid-cols-2 gap-5">
-              <div className="focus-within:scale-[1.02] transition">
-                <input name="fullName" placeholder="Full Name *"
+              <div>
+                <input name="fullName" placeholder="Full Name *" required
                   value={formData.fullName} onChange={handleChange}
                   className={`w-full px-4 py-3 rounded-xl bg-[#0F172A]/80 border text-white placeholder-gray-400 focus:ring-2 transition ${errors.fullName ? "border-red-500 focus:ring-red-400" : "border-white/10 focus:ring-cyan-400"}`} />
                 {errors.fullName && <p className="text-red-400 text-xs mt-1">{errors.fullName}</p>}
               </div>
 
-              <div className="focus-within:scale-[1.02] transition">
-                <input name="mobile" placeholder="Mobile Number *"
+              <div>
+                <input name="mobile" placeholder="Mobile Number *" required
                   value={formData.mobile} onChange={handleChange}
                   className={`w-full px-4 py-3 rounded-xl bg-[#0F172A]/80 border text-white placeholder-gray-400 focus:ring-2 transition ${errors.mobile ? "border-red-500 focus:ring-red-400" : "border-white/10 focus:ring-cyan-400"}`} />
                 {errors.mobile && <p className="text-red-400 text-xs mt-1">{errors.mobile}</p>}
               </div>
             </div>
 
-            {/* Email */}
-            <div className="focus-within:scale-[1.02] transition">
-              <input name="email" placeholder="Email ID *"
+            <div>
+              <input name="email" placeholder="Email ID *" required
                 value={formData.email} onChange={handleChange}
                 className={`w-full px-4 py-3 rounded-xl bg-[#0F172A]/80 border text-white placeholder-gray-400 focus:ring-2 transition ${errors.email ? "border-red-500 focus:ring-red-400" : "border-white/10 focus:ring-cyan-400"}`} />
               {errors.email && <p className="text-red-400 text-xs mt-1">{errors.email}</p>}
             </div>
 
-            {/* Business */}
+            {/* Business Details */}
             <div className="pt-4 border-t border-white/10">
               <h3 className="text-white mb-3">Business Details</h3>
 
-              <input name="natureOfBusiness" placeholder="Nature of Business *"
-                value={formData.natureOfBusiness} onChange={handleChange}
-                className={`w-full px-4 py-3 rounded-xl bg-[#0F172A]/80 border text-white placeholder-gray-400 focus:ring-2 transition ${errors.natureOfBusiness ? "border-red-500 focus:ring-red-400" : "border-white/10 focus:ring-cyan-400"}`} />
+              {/* Nature of Business - Dropdown */}
+              <div className="mb-5">
+                <label className="text-gray-400 text-sm block mb-1">Nature of Business *</label>
+                <select 
+                  name="natureOfBusiness" 
+                  value={formData.natureOfBusiness}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-3 rounded-xl bg-[#0F172A]/80 border text-white focus:ring-2 appearance-none ${errors.natureOfBusiness ? "border-red-500 focus:ring-red-400" : "border-white/10 focus:ring-cyan-400"}`}
+                >
+                  <option value="">Select Nature of Business</option>
+                  {natureOfBusinessOptions.map((option) => (
+                    <option key={option} value={option}>{option}</option>
+                  ))}
+                </select>
+                {errors.natureOfBusiness && <p className="text-red-400 text-xs mt-1">{errors.natureOfBusiness}</p>}
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-5">
+                <div>
+                  <label className="text-gray-400 text-sm block mb-1">Company Name *</label>
+                  <input name="companyName" placeholder="Company Name *"
+                    value={formData.companyName} onChange={handleChange}
+                    className={`w-full px-4 py-3 rounded-xl bg-[#0F172A]/80 border text-white placeholder-gray-400 focus:ring-2 transition ${errors.companyName ? "border-red-500 focus:ring-red-400" : "border-white/10 focus:ring-cyan-400"}`} />
+                  {errors.companyName && <p className="text-red-400 text-xs mt-1">{errors.companyName}</p>}
+                </div>
+
+                <div>
+                  <label className="text-gray-400 text-sm block mb-1">Initial Capital</label>
+                  <select 
+                    name="investment" 
+                    value={formData.investment}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl bg-[#0F172A]/80 border border-white/10 text-white focus:ring-2 focus:ring-cyan-400 appearance-none"
+                  >
+                    {initialCapitalOptions.map((option) => (
+                      <option key={option} value={option}>{option}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
             </div>
 
-            {/* Capital + Name */}
+            {/* Address & Directors */}
             <div className="grid md:grid-cols-2 gap-5">
-              <input name="authorizedCapital" placeholder="Authorized Capital"
-                value={formData.authorizedCapital} onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl bg-[#0F172A]/80 border border-white/10 text-white placeholder-gray-400 focus:ring-2 focus:ring-cyan-400" />
+              <div>
+                <label className="text-gray-400 text-sm block mb-1">State *</label>
+                <select name="state" value={formData.state}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-3 rounded-xl bg-[#0F172A]/80 border text-white focus:ring-2 appearance-none ${errors.state ? "border-red-500 focus:ring-red-400" : "border-white/10 focus:ring-cyan-400"}`}>
+                  <option value="">Select State *</option>
+                  {states.map(s => <option key={s} value={s}>{s}</option>)}
+                </select>
+                {errors.state && <p className="text-red-400 text-xs mt-1">{errors.state}</p>}
+              </div>
 
-              <input name="companyName" placeholder="Company Name *"
-                value={formData.companyName} onChange={handleChange}
-                className={`w-full px-4 py-3 rounded-xl bg-[#0F172A]/80 border text-white placeholder-gray-400 focus:ring-2 transition ${errors.companyName ? "border-red-500 focus:ring-red-400" : "border-white/10 focus:ring-cyan-400"}`} />
+              <div>
+                <label className="text-gray-400 text-sm block mb-1">Number of Directors *</label>
+                <select 
+                  name="members" 
+                  value={formData.members}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-3 rounded-xl bg-[#0F172A]/80 border text-white focus:ring-2 appearance-none ${errors.members ? "border-red-500" : "border-white/10"}`}
+                >
+                  {numberOfDirectorsOptions.map(num => (
+                    <option key={num} value={num}>{num} Directors</option>
+                  ))}
+                </select>
+              </div>
             </div>
 
-            {/* Address */}
-            <div className="grid md:grid-cols-2 gap-5">
-              <select name="state" value={formData.state}
-                onChange={handleChange}
-                className={`w-full px-4 py-3 rounded-xl bg-[#0F172A]/80 border text-white focus:ring-2 appearance-none ${errors.state ? "border-red-500 focus:ring-red-400" : "border-white/10 focus:ring-cyan-400"}`}>
-                <option value="">Select State *</option>
-                {states.map(s => <option key={s}>{s}</option>)}
-              </select>
-
-              <input name="address1" placeholder="Address *"
+            <div>
+              <label className="text-gray-400 text-sm block mb-1">Registered Address *</label>
+              <input name="address1" placeholder="Full Address *" 
                 value={formData.address1} onChange={handleChange}
                 className={`w-full px-4 py-3 rounded-xl bg-[#0F172A]/80 border text-white placeholder-gray-400 focus:ring-2 ${errors.address1 ? "border-red-500 focus:ring-red-400" : "border-white/10 focus:ring-cyan-400"}`} />
+              {errors.address1 && <p className="text-red-400 text-xs mt-1">{errors.address1}</p>}
             </div>
 
-            {/* Members + Investment */}
-            <div className="grid md:grid-cols-2 gap-5">
-              <input type="number" name="members"
-                value={formData.members} onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl bg-[#0F172A]/80 border border-white/10 text-white focus:ring-2 focus:ring-cyan-400" />
-
-              <select name="investment"
-                value={formData.investment}
-                onChange={handleChange}
-                className="w-full px-4 py-3 rounded-xl bg-[#0F172A]/80 border border-white/10 text-white focus:ring-2 focus:ring-cyan-400">
-                <option>₹ 0 - 10 Lakhs</option>
-                <option>₹ 10 Lakh - 1 Crore</option>
-                <option>More than ₹ 1 Crore</option>
-              </select>
-            </div>
-
-            {/* Trust */}
-            <div className="flex justify-center gap-6 text-gray-400 text-sm">
+            {/* Trust Badges */}
+            <div className="flex justify-center gap-6 text-gray-400 text-sm pt-4">
               <span>🔒 Secure</span>
               <span>⚡ Fast</span>
               <span>💼 Verified</span>
             </div>
 
-            {/* Button */}
+            {/* Submit Button */}
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-4 rounded-xl font-semibold bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 active:scale-95 transition-all shadow-lg hover:shadow-cyan-500/40"
+              className="w-full py-4 rounded-xl font-semibold bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 active:scale-95 transition-all shadow-lg hover:shadow-cyan-500/40 disabled:opacity-70"
             >
               {loading ? "Submitting..." : "Submit & Continue →"}
             </button>
