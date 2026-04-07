@@ -3,10 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 const companyTypes = [
   { id: 1, name: "Private Limited", icon: "🏢", desc: "Limited Liability + Easy Funding + Perpetual Succession" },
-  { id: 2, name: "LLP", icon: "🤝", desc: "Flexible management + Low compliance for professionals" },
-  { id: 3, name: "Section 8", icon: "🛡️", desc: "Non-Profit / NGO Company for social welfare" },
-  { id: 4, name: "Partnership", icon: "👥", desc: "Simple setup for small businesses & teams" },
-  { id: 5, name: "OPC", icon: "👤", desc: "One Person Company with limited liability" },
+  { id: 2, name: "OPC", icon: "👤", desc: "One Person Company with limited liability" },
+  { id: 3, name: "LLP", icon: "🤝", desc: "Flexible management + Low compliance for professionals" },
+  { id: 4, name: "Section 8", icon: "🛡️", desc: "Non-Profit / NGO Company for social welfare" },
+  { id: 5, name: "Partnership", icon: "👥", desc: "Simple setup for small businesses & teams" },
+  
 ];
 
 const CompanyCards = () => {
