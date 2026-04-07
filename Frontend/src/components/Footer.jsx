@@ -78,10 +78,11 @@ const Footer = () => {
           <div className="lg:col-span-2">
             <h4 className="text-slate-900 font-semibold mb-5">Services</h4>
             <ul className="space-y-3 text-slate-600">
-              <li className="hover:text-blue-600 transition cursor-pointer">Private Limited Company</li>
-              <li className="hover:text-blue-600 transition cursor-pointer">LLP Registration</li>
-              <li className="hover:text-blue-600 transition cursor-pointer">OPC Registration</li>
-              <li className="hover:text-blue-600 transition cursor-pointer">Section 8 Company</li>
+            <Link to="/company-incorporation/private-limited">  <li className="hover:text-blue-600 transition cursor-pointer">Private Limited Company</li> </Link>
+            <Link to="/company-incorporation/llp"> <li className="hover:text-blue-600 transition cursor-pointer">LLP Registration</li>  </Link>
+             <Link to="/company-incorporation/opc"> <li className="hover:text-blue-600 transition cursor-pointer">OPC Registration</li> </Link>
+             <Link to="/company-incorporation/section-8"> <li className="hover:text-blue-600 transition cursor-pointer">Section 8 Company</li> </Link>
+             <Link to="/company-incorporation/partnership"> <li className="hover:text-blue-600 transition cursor-pointer">Partnership Firm</li> </Link>
             </ul>
           </div>
 
