@@ -51,7 +51,7 @@ const TopContactBar = () => {
 
           {/* Timing */}
           <span className="text-xs text-slate-500 hidden sm:block">
-            Mon–Sat: 10 AM – 7 PM
+            Mon–Sat: 10 AM – 6 PM
           </span>
 
         </div>
