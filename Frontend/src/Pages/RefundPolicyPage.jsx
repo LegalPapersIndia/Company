@@ -10,9 +10,9 @@ export default function RefundPolicyPage() {
 
         {/* Header */}
         <div className="text-center mb-16">
-          <h1 className="text-5xl font-extrabold bg-gradient-to-r from-blue-600 to-gray-400 bg-clip-text text-transparent mb-3">
-            Refund Policy
-          </h1>
+<h1 className="text-5xl font-extrabold text-blue-700 mb-3">
+  Refund Policy
+</h1>
           <p className="text-gray-500 text-sm">
             Last Updated: April 06, 2026
           </p>
