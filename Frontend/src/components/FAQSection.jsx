@@ -56,16 +56,18 @@ const FAQSection = () => {
         id="faq"
           key={actualIndex}
           onClick={() => toggleFAQ(actualIndex)}
-          className="group cursor-pointer rounded-2xl p-[1px] bg-gradient-to-br from-white/10 to-transparent hover:from-blue-500/40 transition-all duration-500"
+          className="group cursor-pointer rounded-2xl p-[1px] bg-gradient-to-br from-blue-600/10 to-transparent hover:from-blue-600/20 transition-all duration-500"
         >
-          <div className="rounded-2xl bg-white/5 backdrop-blur-lg p-6 border border-white/10 group-hover:border-blue-400/30 transition-all duration-500">
+          <div className="rounded-2xl bg-white p-6 border border-slate-200 group-hover:border-blue-500/40 transition-all duration-500 hover:shadow-lg">
             
             {/* Question */}
             <div className="flex justify-between items-center">
-              <h3 className="font-medium text-lg">{faq.q}</h3>
+              <h3 className="font-medium text-lg text-slate-900">
+                {faq.q}
+              </h3>
 
               {/* Icon */}
-              <span className="text-blue-400 text-2xl transition-all duration-300">
+              <span className="text-blue-600 text-2xl font-light transition-all duration-300">
                 {isOpen ? "−" : "+"}
               </span>
             </div>
@@ -76,7 +78,7 @@ const FAQSection = () => {
                 isOpen ? "max-h-40 mt-4" : "max-h-0"
               }`}
             >
-              <p className="text-gray-300 text-sm leading-relaxed">
+              <p className="text-slate-600 text-sm leading-relaxed">
                 {faq.a}
               </p>
             </div>
@@ -86,17 +88,20 @@ const FAQSection = () => {
     });
 
   return (
-    <section className="py-24 bg-gradient-to-b from-[#001122] to-[#000814] text-white">
+    <section className="py-24 bg-white text-slate-800">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Heading */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold">
-            Frequently Asked <span className="text-blue-400">Questions</span>
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
+            Frequently Asked <span className="text-blue-600">Questions</span>
           </h2>
+          <p className="text-slate-600 mt-4 text-lg">
+            Everything you need to know about company registration
+          </p>
         </div>
 
-        {/* 2 Column */}
+        {/* 2 Column Layout */}
         <div className="grid md:grid-cols-2 gap-8">
           <div className="space-y-6">
             {renderFAQ(leftFAQs, 0)}

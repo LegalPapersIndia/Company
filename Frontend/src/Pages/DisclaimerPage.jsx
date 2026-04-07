@@ -1,18 +1,18 @@
 export default function DisclaimerPage() {
   return (
-    <div className="min-h-screen bg-[#020617] relative overflow-hidden py-20 px-6">
+    <div className="min-h-screen bg-white relative overflow-hidden py-20 px-6">
 
-      {/* Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-500/10 blur-[120px] rounded-full"></div>
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-cyan-500/10 blur-[120px] rounded-full"></div>
+      {/* Soft Background Glow */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-100 blur-[120px] rounded-full"></div>
+      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-gray-200 blur-[120px] rounded-full"></div>
 
       <div className="max-w-4xl mx-auto relative animate-[fadeIn_0.6s_ease]">
 
         {/* Card */}
-        <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-[0_20px_60px_rgba(0,0,0,0.6)] overflow-hidden">
+        <div className="bg-white border border-gray-200 rounded-3xl shadow-lg overflow-hidden">
 
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white py-12 px-8 text-center">
+          <div className="bg-gradient-to-r from-blue-600 to-gray-400 text-white py-12 px-8 text-center">
             <h1 className="text-4xl md:text-5xl font-extrabold mb-3">
               Disclaimer
             </h1>
@@ -22,15 +22,15 @@ export default function DisclaimerPage() {
           </div>
 
           {/* Content */}
-          <div className="p-8 md:p-12 text-gray-300 leading-relaxed space-y-8 text-[15px]">
+          <div className="p-8 md:p-12 text-gray-700 leading-relaxed space-y-8 text-[15px]">
 
             {/* Highlight Box */}
-            <div className="bg-blue-900/30 border border-blue-400/20 border-l-4 border-blue-400 p-6 rounded-xl shadow-inner">
-              <p className="font-semibold text-lg text-white">
+            <div className="bg-blue-50 border border-blue-200 border-l-4 border-blue-500 p-6 rounded-xl">
+              <p className="font-semibold text-lg text-blue-900">
                 This is a{" "}
-                <span className="text-blue-400">private consultancy platform</span>{" "}
+                <span className="text-blue-600">private consultancy platform</span>{" "}
                 and is{" "}
-                <span className="text-red-400">not affiliated</span>{" "}
+                <span className="text-red-500">not affiliated</span>{" "}
                 with the Ministry of Corporate Affairs (MCA) or any Government department.
               </p>
             </div>
@@ -45,7 +45,7 @@ export default function DisclaimerPage() {
 
             <p>
               This website is{" "}
-              <strong className="text-white">
+              <strong className="text-blue-700">
                 not an official Government portal
               </strong>. We assist in documentation, name approval, SPICe+ filing,
               and post-incorporation compliance support to simplify the process
@@ -53,8 +53,8 @@ export default function DisclaimerPage() {
             </p>
 
             {/* Divider Section */}
-            <div className="pt-6 border-t border-white/10">
-              <p className="italic text-gray-400">
+            <div className="pt-6 border-t border-gray-200">
+              <p className="italic text-gray-500">
                 All payments made on this platform are for consultancy and
                 professional services only. Government fees such as MCA fees,
                 stamp duty, and statutory charges are paid separately on the
@@ -63,9 +63,9 @@ export default function DisclaimerPage() {
             </div>
 
             {/* Trust Note */}
-            <div className="bg-white/5 border border-white/10 rounded-xl p-5 flex items-start gap-3">
-              <span className="text-green-400 text-xl">✔</span>
-              <p className="text-sm text-gray-400">
+            <div className="bg-gray-50 border border-gray-200 rounded-xl p-5 flex items-start gap-3">
+              <span className="text-green-500 text-xl">✔</span>
+              <p className="text-sm text-gray-600">
                 We ensure transparency, compliance, and professional guidance
                 throughout your company registration journey.
               </p>

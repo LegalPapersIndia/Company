@@ -5,24 +5,31 @@ function ScrollToTop() {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    // If URL has hash (#faq, #stats)
     if (hash) {
-      const element = document.querySelector(hash);
-      if (element) {
-        element.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-        return;
-      }
-    }
+      // Small delay to ensure the element is rendered
+      setTimeout(() => {
+        const element = document.querySelector(hash);
+        if (element) {
+          const navbarHeight = 80; // Adjust if your navbar is taller/thinner
+          
+          const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+          const offsetPosition = elementPosition - navbarHeight;
 
-    // Normal route change → scroll to top
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth", // change to "auto" if you want instant
-    });
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }
+      }, 100); // Small delay for DOM to be ready
+    } 
+    else {
+      // Normal route change → scroll to top
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+      });
+    }
   }, [pathname, hash]);
 
   return null;

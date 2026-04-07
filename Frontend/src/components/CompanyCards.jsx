@@ -18,9 +18,9 @@ const CompanyCards = () => {
   };
 
   return (
-    <section id="Card" className="relative">
-      {/* Background Glow */}
-      <div className="absolute inset-0 flex justify-center">
+    <section id="Card" className="relative py-20 bg-white">
+      {/* Light Background Glow */}
+      <div className="absolute inset-0 flex justify-center pointer-events-none">
         <div className="w-[500px] h-[500px] bg-blue-500/10 blur-[120px] rounded-full"></div>
       </div>
 
@@ -29,10 +29,10 @@ const CompanyCards = () => {
           <div
             key={type.id}
             onClick={() => handleCardClick(type.name)}
-            className="group relative cursor-pointer rounded-3xl p-[1px] bg-gradient-to-b from-blue-500/30 to-transparent hover:from-blue-500/70 transition-all duration-500"
+            className="group relative cursor-pointer rounded-3xl p-[1px] bg-gradient-to-b from-blue-600/20 to-transparent hover:from-blue-600/30 transition-all duration-500"
           >
             {/* Card */}
-            <div className="h-full rounded-3xl bg-white/5 backdrop-blur-xl p-8 text-center border border-white/10 group-hover:border-blue-400/40 transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl hover:shadow-blue-500/10">
+            <div className="h-full rounded-3xl bg-white p-8 text-center border border-slate-200 group-hover:border-blue-500/50 transition-all duration-500 hover:-translate-y-4 hover:shadow-2xl hover:shadow-blue-500/10">
               
               {/* Icon */}
               <div className="text-6xl mb-6 transition-all duration-500 group-hover:scale-125 group-hover:-rotate-6">
@@ -40,28 +40,28 @@ const CompanyCards = () => {
               </div>
 
               {/* Title */}
-              <h3 className="text-xl font-semibold mb-3 text-white">
+              <h3 className="text-xl font-semibold mb-3 text-slate-900">
                 {type.name}
               </h3>
 
               {/* Description */}
-              <p className="text-slate-300 text-sm leading-relaxed min-h-[60px]">
+              <p className="text-slate-600 text-sm leading-relaxed min-h-[60px]">
                 {type.desc}
               </p>
 
               {/* Divider */}
-              <div className="w-8 h-[2px] bg-blue-400 mx-auto my-5 opacity-70 group-hover:w-14 transition-all duration-300"></div>
+              <div className="w-8 h-[2px] bg-blue-600 mx-auto my-5 opacity-80 group-hover:w-14 transition-all duration-300"></div>
 
               {/* CTA */}
-              <div className="mt-4 inline-flex items-center gap-2 text-blue-400 font-medium text-sm transition-all">
+              <div className="mt-4 inline-flex items-center gap-2 text-blue-600 font-medium text-sm transition-all group-hover:text-blue-700">
                 Start Incorporation
                 <span className="text-lg transition-all duration-300 group-hover:translate-x-2">
                   →
                 </span>
               </div>
 
-              {/* Glow Overlay on Hover */}
-              <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-tr from-blue-500/10 to-transparent"></div>
+              {/* Subtle Hover Glow */}
+              <div className="absolute inset-0 rounded-3xl opacity-0 group-hover:opacity-100 transition duration-500 bg-gradient-to-tr from-blue-500/5 to-transparent"></div>
             </div>
           </div>
         ))}
