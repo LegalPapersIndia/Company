@@ -16,14 +16,14 @@ const Hero = () => {
           
           {/* Trust Badge */}
           <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-600 px-6 py-2 rounded-full text-sm font-medium mb-6 border border-blue-100">
-            ✅ Trusted by 1200+ Entrepreneurs
+            ✅ Trusted by 10000+ Entrepreneurs
           </div>
 
           {/* Heading */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 leading-tight text-gray-900">
             Register Your Dream Company <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-gray-400">
-              in Just 5 Days
+              in Just 7 Days
             </span>
           </h1>
 

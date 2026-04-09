@@ -5,7 +5,7 @@ const BenefitsSection = () => {
     {
       emoji: "⚡",
       title: "7-Day Fast Incorporation",
-      desc: "Name approval to final certificate in 7-15 days with dedicated MCA follow-up",
+      desc: "Name approval to final certificate in 5-7 days with dedicated MCA follow-up",
     },
     {
       emoji: "💰",
@@ -47,7 +47,7 @@ const BenefitsSection = () => {
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 leading-tight text-slate-900">
             Why Choose{" "}
-            <span className="text-blue-600">IncoFast</span>?
+            <span className="text-blue-600">IncorpFast</span>?
           </h2>
           <p className="text-slate-600 text-lg max-w-2xl mx-auto">
             We simplify the entire MCA company registration process for entrepreneurs across India

@@ -20,7 +20,7 @@ const Footer = () => {
                 📋
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-slate-900">IncoFast</h2>
+                <h2 className="text-2xl font-bold text-slate-900">IncorpFast</h2>
                 <p className="text-xs text-slate-500">MCA Registered Partner</p>
               </div>
             </div>
@@ -47,7 +47,7 @@ const Footer = () => {
                 <FaWhatsapp />
               </a>
               <a 
-                href="mailto:info@incofast.in" 
+                href="mailto:info@incorpfast.in" 
                 className="w-11 h-11 flex items-center justify-center rounded-xl border border-slate-200 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300"
               >
                 <FaEnvelope />
@@ -70,6 +70,7 @@ const Footer = () => {
             <h4 className="text-slate-900 font-semibold mb-5">Legal</h4>
             <ul className="space-y-3 text-slate-600">
               <li><Link to="/refund-policy" className="hover:text-blue-600 transition">Refund Policy</Link></li>
+              <li><Link to="/privacy" className="hover:text-blue-600 transition">Privacy Policy</Link></li>
               <li><Link to="/terms" className="hover:text-blue-600 transition">Terms & Conditions</Link></li>
             </ul>
           </div>
@@ -96,7 +97,7 @@ const Footer = () => {
               </p>
               <p>
                 <span className="block text-slate-500 font-medium">Email</span>
-                info@incofast.in
+                info@incorpfast.in
               </p>
               <p className="text-slate-500 mt-4">
                 Mon - Sat: 10:00 AM - 6:00 PM<br />
@@ -110,7 +111,7 @@ const Footer = () => {
         <div className="border-t border-slate-200 mt-16 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
           
           <p className="text-slate-500 text-sm text-center md:text-left">
-            © 2026 IncoFast. All rights reserved.
+            © 2026 IncorpFast. All rights reserved.
           </p>
 
           <p className="text-slate-500 text-sm text-center">

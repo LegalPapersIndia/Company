@@ -21,6 +21,7 @@ import PaymentSummary from "./Pages/PaymentSummary";
 import AdminDashboard from "./Pages/admin-dashboard";
 import AdminLogin from "./Pages/admin-login";
 import ProtectedRoute from "./components/ProtectedRoute"; // ✅ NEW
+import PrivacyPolicyPage from "./Pages/PrivacyPolicyPage";
 
 function HomePage() {
   return (
@@ -48,6 +49,7 @@ function App() {
         <Route path="/disclaimer" element={<DisclaimerPage />} />
         <Route path="/refund-policy" element={<RefundPolicyPage />} />
         <Route path="/terms" element={<TermsAndConditionsPage />} />
+        <Route path="/privacy" element={<PrivacyPolicyPage />} />
 
         <Route
           path="/company-incorporation/:type"

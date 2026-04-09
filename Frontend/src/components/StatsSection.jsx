@@ -34,10 +34,14 @@ const StatsSection = () => {
   };
 
   const stats = [
-    { value: 1248, label: "Total Enquiries" },
-    { value: 437, label: "Companies Incorporated" },
-    { value: 289, label: "Private Limited" },
-    { value: 98, label: "LLP Applications" },
+    { value: 50000, label: "Total Enquiries" },
+    { value: 5000, label: "Companies Incorporated" },
+    { value: 3100, label: "Private Limited" },
+    { value: 1000, label: "LLP Applications" },
+        { value: 600, label: "One Person Company" },
+            { value: 500, label: "Section 8 Company" },
+                { value: 6000, label: "Name Reservations" },
+                    { value: 4000, label: "Annual Compliances" },
   ];
 
   return (
