@@ -39,14 +39,6 @@ const Footer = () => {
                 <FaPhoneAlt />
               </a>
               <a 
-                href="https://wa.me/919211037448" 
-                target="_blank" 
-                rel="noreferrer" 
-                className="w-11 h-11 flex items-center justify-center rounded-xl border border-slate-200 hover:border-green-500 hover:text-green-600 hover:bg-green-50 transition-all duration-300"
-              >
-                <FaWhatsapp />
-              </a>
-              <a 
                 href="mailto:info@incorpfast.in" 
                 className="w-11 h-11 flex items-center justify-center rounded-xl border border-slate-200 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300"
               >
