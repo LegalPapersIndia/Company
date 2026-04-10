@@ -2,11 +2,11 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const companyTypes = [
-  { id: 1, name: "Private Limited", icon: "🏢", desc: "Limited Liability + Easy Funding + Perpetual Succession" },
-  { id: 2, name: "OPC", icon: "👤", desc: "One Person Company with limited liability" },
-  { id: 3, name: "LLP", icon: "🤝", desc: "Flexible management + Low compliance for professionals" },
-  { id: 4, name: "Section 8", icon: "🛡️", desc: "Non-Profit / NGO Company for social welfare" },
-  { id: 5, name: "Partnership", icon: "👥", desc: "Simple setup for small businesses & teams" },
+  { id: 1, name: "Private Limited", icon: "🏢", desc: "Approval of Company Name + Certificate of Incorporation + PAN Number + TAN Number + 2 DIN of Directors + 2 DSC of Directors + eMOA & eAOA + PF & ESI Registration" },
+  { id: 2, name: "OPC", icon: "👤", desc: "Company Name Approval + Certificate of Incorporation + PAN Number + TAN Number + DIN of Director + DSC of Director + eMOA & eAOA + PF & ESI Registration" },
+  { id: 3, name: "LLP", icon: "🤝", desc: "Approval of Company Name + Certificate of Incorporation + PAN + TAN + Two DINs + Electronic Memorandum of Association (eMOA) + Electronic Articles of Association (eAOA)" },
+  { id: 4, name: "Section 8", icon: "🛡️", desc: "Company Name Approval + Certificate of Incorporation + PAN & TAN Registration + 2 DINs + eMOA & eAOA Documents + Complete Startup Compliance Support" },
+  { id: 5, name: "Partnership", icon: "👥", desc: "Basic Name Availability Check + Firm Name Registration + PAN Application + Timely Service + Professional Support" },
   
 ];
 

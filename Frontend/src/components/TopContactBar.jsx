@@ -37,17 +37,6 @@ const TopContactBar = () => {
 
         {/* Right Side */}
         <div className="flex items-center gap-5">
-          
-          {/* WhatsApp Highlight */}
-          <a
-            href="https://wa.me/919211037448"
-            target="_blank"
-            rel="noreferrer"
-            className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-50 text-green-600 hover:bg-green-100 transition-all duration-300 font-medium"
-          >
-            <FaWhatsapp />
-            Chat on WhatsApp
-          </a>
 
           {/* Timing */}
           <span className="text-xs text-slate-500 hidden sm:block">

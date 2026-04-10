@@ -21,14 +21,24 @@ const companyTypes = [
 ];
 
 const natureOfBusinessOptions = [
-  "Manufacturer Exporter",
-  "Merchant Exporter",
-  "Merchant cum Manufacturer Exporter",
-  "Service Provider",
-  "Merchant cum Service Provider",
-  "Manufacturer cum Service Provider",
-  "Merchant cum Manufacturer cum Service Provider",
-  "Others"
+  "Manufacturer",
+  "Importers",
+  "Exporters",
+  "Cold Storage",
+  "Wholesaler",
+  "Retailer",
+  "Distributor",
+  "Food Vending Agency",
+  "Supplier",
+  "Caterer",
+  "Dhaba / Food Stall",
+  "Club / Canteen",
+  "Hotel",
+  "Restaurant",
+  "Transporter",
+  "Marketer",
+  "Hawker",
+  "Petty Retailers of Snacks/ tea shops",
 ];
 
 const initialCapitalOptions = [
@@ -304,7 +314,7 @@ const res = await fetch(`${API_URL}/api/leads/submit`, {
               </div>
 
               <div>
-                <label className="text-slate-700 font-medium block mb-2">Number of Directors / Partners *</label>
+                <label className="text-slate-700 font-medium block mb-2">Number of Directors / Partners / Members *</label>
                 <select 
                   name="members" 
                   value={formData.members}
@@ -312,7 +322,7 @@ const res = await fetch(`${API_URL}/api/leads/submit`, {
                   className="w-full px-5 py-4 rounded-2xl border border-slate-300 bg-white text-slate-900 focus:border-blue-600 focus:ring-1 focus:ring-blue-600"
                 >
                   {numberOfDirectorsOptions.map(num => (
-                    <option key={num} value={num}>{num} Directors</option>
+                    <option key={num} value={num}>{num}</option>
                   ))}
                 </select>
               </div>
