@@ -43,16 +43,16 @@ const StatsSection = () => {
     { value: 4000, label: "Annual Compliances" },
   ];
 
-  // Comparison Table Data
-  const comparisonData = [
-    { feature: "Limited Liability", pvt: "Yes", llp: "Yes", section8: "Yes", opc: "Yes", partnership: "No" },
-    { feature: "Separate Legal Entity", pvt: "Yes", llp: "Yes", section8: "Yes", opc: "Yes", partnership: "No" },
-    { feature: "Minimum Members", pvt: "2", llp: "2", section8: "2", opc: "1", partnership: "2" },
-    { feature: "Foreign Investment Allowed", pvt: "Yes", llp: "Yes", section8: "No", opc: "No", partnership: "No" },
-    { feature: "Perpetual Succession", pvt: "Yes", llp: "Yes", section8: "Yes", opc: "Yes", partnership: "No" },
-    { feature: "Easy to Raise Funding", pvt: "High", llp: "Medium", section8: "Low", opc: "Low", partnership: "Low" },
-    { feature: "Compliance Level", pvt: "High", llp: "Medium", section8: "High", opc: "Medium", partnership: "Low" },
-    { feature: "Tax Benefits", pvt: "Good", llp: "Good", section8: "Exempt", opc: "Good", partnership: "Basic" },
+  // ✅ Comparison Table Data (Correct Name)
+  const comparisonFeatures = [
+    { feature: "Legal Identity", pvt: "Separate legal entity", opc: "Separate legal entity", llp: "Separate legal entity", section8: "Separate legal entity", partnership: "No separate legal identity" },
+    { feature: "Liability", pvt: "Limited to shareholding", opc: "Limited to shareholding", llp: "Limited to agreed contribution", section8: "Limited", partnership: "Unlimited personal liability" },
+    { feature: "Minimum Members", pvt: "2", opc: "1", llp: "2", section8: "2", partnership: "2" },
+    { feature: "Ownership & Control", pvt: "Shareholders", opc: "Single owner", llp: "Partners share management", section8: "Members / Trustees", partnership: "Partners share responsibility" },
+    { feature: "Compliance Level", pvt: "High", opc: "Medium", llp: "Medium to High", section8: "High", partnership: "Low" },
+    { feature: "Fundraising", pvt: "Easy (Equity & Debt)", opc: "Limited", llp: "Moderate", section8: "Difficult (Non-profit)", partnership: "Limited" },
+    { feature: "Credibility", pvt: "Very High", opc: "High", llp: "High", section8: "High", partnership: "Moderate" },
+    { feature: "Suitability", pvt: "Expansion & Scaling", opc: "Solo Entrepreneurs", llp: "Professional Services", section8: "Non-profit / Charity", partnership: "Small Businesses" },
   ];
 
   return (
@@ -100,50 +100,32 @@ const StatsSection = () => {
         {/* ==================== COMPARISON TABLE ==================== */}
         <div className="mb-12 md:mb-20">
           <h3 className="text-2xl md:text-3xl font-semibold text-center mb-8 text-slate-900">
-            Service Comparison
+            Difference Between Private Limited Company and Other Business Structures
           </h3>
 
-          <div className="overflow-x-auto rounded-3xl border border-slate-200 shadow-sm">
-            <table className="w-full min-w-[800px] text-sm md:text-base">
-              <thead className="bg-slate-50 border-b border-slate-200">
-                <tr>
-                  <th className="text-left p-6 font-semibold text-slate-700">Features</th>
-                  <th className="text-center p-6 font-semibold text-slate-700">Private Limited</th>
-                  <th className="text-center p-6 font-semibold text-slate-700">LLP</th>
-                  <th className="text-center p-6 font-semibold text-slate-700">Section 8</th>
-                  <th className="text-center p-6 font-semibold text-slate-700">OPC</th>
-                  <th className="text-center p-6 font-semibold text-slate-700">Partnership</th>
+          <div className="overflow-x-auto rounded-3xl border border-slate-200 shadow-sm bg-white">
+            <table className="w-full min-w-[900px] text-sm md:text-base">
+              <thead>
+                <tr className="bg-gradient-to-r from-blue-700 to-blue-600 text-white">
+                  <th className="text-left p-5 font-semibold rounded-tl-3xl">Aspect</th>
+                  <th className="text-center p-5 font-semibold">Private Limited</th>
+                  <th className="text-center p-5 font-semibold">OPC</th>
+                  <th className="text-center p-5 font-semibold">LLP</th>
+                  <th className="text-center p-5 font-semibold">Section 8</th>
+                  <th className="text-center p-5 font-semibold rounded-tr-3xl">Partnership</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
-                {comparisonData.map((row, index) => (
-                  <tr key={index} className="hover:bg-slate-50 transition-colors">
-                    <td className="p-6 font-medium text-slate-700">{row.feature}</td>
-                    <td className="text-center p-6">
-                      <span className={`${row.pvt === "Yes" || row.pvt === "High" || row.pvt === "Good" || row.pvt === "Exempt" ? "text-emerald-600 font-semibold" : "text-amber-600"}`}>
-                        {row.pvt}
-                      </span>
+                {comparisonFeatures.map((row, index) => (   // ← Fixed: Now using comparisonFeatures
+                  <tr key={index} className="hover:bg-blue-50/50 transition-colors">
+                    <td className="p-5 font-medium text-slate-700 border-r border-slate-100">
+                      {row.feature}
                     </td>
-                    <td className="text-center p-6">
-                      <span className={`${row.llp === "Yes" || row.llp === "High" || row.llp === "Good" ? "text-emerald-600 font-semibold" : "text-amber-600"}`}>
-                        {row.llp}
-                      </span>
-                    </td>
-                    <td className="text-center p-6">
-                      <span className={`${row.section8 === "Yes" || row.section8 === "High" || row.section8 === "Exempt" ? "text-emerald-600 font-semibold" : "text-amber-600"}`}>
-                        {row.section8}
-                      </span>
-                    </td>
-                    <td className="text-center p-6">
-                      <span className={`${row.opc === "Yes" || row.opc === "High" || row.opc === "Good" ? "text-emerald-600 font-semibold" : "text-amber-600"}`}>
-                        {row.opc}
-                      </span>
-                    </td>
-                    <td className="text-center p-6">
-                      <span className={`${row.partnership === "Yes" || row.partnership === "High" || row.partnership === "Good" ? "text-emerald-600 font-semibold" : "text-amber-600"}`}>
-                        {row.partnership}
-                      </span>
-                    </td>
+                    <td className="p-5 text-center text-slate-700">{row.pvt}</td>
+                    <td className="p-5 text-center text-slate-700">{row.opc}</td>
+                    <td className="p-5 text-center text-slate-700">{row.llp}</td>
+                    <td className="p-5 text-center text-slate-700">{row.section8}</td>
+                    <td className="p-5 text-center text-slate-700">{row.partnership}</td>
                   </tr>
                 ))}
               </tbody>
@@ -151,7 +133,7 @@ const StatsSection = () => {
           </div>
         </div>
 
-        {/* Bottom Section - Applications This Month + MCA Insights */}
+        {/* Bottom Section */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-10">
           
           {/* Applications This Month */}
