@@ -19,6 +19,7 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
           
           {/* Logo */}
+          <Link to='/'>
           <div className="flex items-center gap-3 group cursor-pointer">
             <div className="w-11 h-11 bg-gradient-to-br from-blue-600 to-cyan-500 rounded-2xl flex items-center justify-center text-2xl shadow-md text-white group-hover:scale-110 transition-transform">
               📋
@@ -32,6 +33,7 @@ const Navbar = () => {
               </p>
             </div>
           </div>
+          </Link>
 
           {/* Links */}
           <div className="hidden md:flex items-center gap-8 text-sm font-medium">
