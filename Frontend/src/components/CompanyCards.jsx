@@ -27,7 +27,7 @@ const companyTypes = [
   },
   {
     id: 2,
-    name: "OPC",
+    name: "OPC Pvt Ltd",
     Icon: User,
     color: "text-emerald-600",
     desc: [
@@ -43,36 +43,39 @@ const companyTypes = [
   },
   {
     id: 3,
-    name: "LLP",
+    name: "LLP Firm",
     Icon: Handshake,
     color: "text-amber-600",
     desc: [
       "Approval of Company Name",
       "Certificate of Incorporation",
       "PAN & TAN Registration",
-      "2 DINs of Partners",
+      "2 DIN of Partners",
+      "2 DSC of Partners",
       "LLP Deed Draft",
+      "PF & ESI Registration",
       "Current Account Opening"
     ]
   },
   {
     id: 4,
-    name: "Section 8",
+    name: "Section 8 Company",
     Icon: ShieldCheck,
     color: "text-violet-600",
     desc: [
       "Company Name Approval",
       "Certificate of Incorporation",
       "PAN & TAN Registration",
-      "2 DINs of Members",
+      "2 DIN of Members",
+      "2 DSC of Members",
       "eMOA & eAOA",
-      "Complete Startup Compliance Support",
+      "PF & ESI Registration",
       "Current Account Opening"
     ]
   },
   {
     id: 5,
-    name: "Partnership",
+    name: "Partnership Firm",
     Icon: Users,
     color: "text-rose-600",
     desc: [
@@ -81,6 +84,7 @@ const companyTypes = [
       "PAN & TAN Registration",
       "GST Registration",
       "Udyam Registration",
+      "Shop Establishment Certificate",
       "Current Account Opening"
     ]
   },
@@ -143,7 +147,7 @@ const CompanyCards = () => {
                     onClick={(e) => {
                       e.stopPropagation();
                       handleCardClick(type.name);
-                    }}
+                    }}  
                     className="mt-auto w-full py-4 px-6 rounded-2xl bg-blue-600 text-white font-semibold text-sm tracking-wide
                                hover:bg-blue-700 active:bg-blue-800 
                                transition-all duration-300 flex items-center justify-center gap-2
