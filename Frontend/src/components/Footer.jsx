@@ -39,7 +39,7 @@ const Footer = () => {
                 <FaPhoneAlt />
               </a>
               <a 
-                href="mailto:info@incorpfast.in" 
+                href="mailto:info@incorpfast.org" 
                 className="w-11 h-11 flex items-center justify-center rounded-xl border border-slate-200 hover:border-blue-500 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300"
               >
                 <FaEnvelope />
@@ -89,7 +89,7 @@ const Footer = () => {
               </p>
               <p>
                 <span className="block text-slate-500 font-medium">Email</span>
-                info@incorpfast.in
+                info@incorpfast.org
               </p>
               <p className="text-slate-500 mt-4">
                 Mon - Sat: 10:00 AM - 6:00 PM<br />

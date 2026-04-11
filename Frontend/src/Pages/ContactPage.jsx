@@ -23,7 +23,7 @@ export default function ContactPage() {
         </div>
 
         {/* Contact Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
 
           {/* Phone */}
           <div className="group bg-white border border-gray-200 rounded-3xl p-8 md:p-10 text-center hover:scale-[1.03] hover:border-blue-400 transition-all duration-300 shadow-sm hover:shadow-blue-100">
@@ -41,7 +41,7 @@ export default function ContactPage() {
               <FaEnvelope size={34} />
             </div>
             <h3 className="text-2xl font-semibold text-blue-700 mb-2">Email Us</h3>
-            <p className="text-gray-700 text-lg break-all font-medium">info@incorpfast.in</p>
+            <p className="text-gray-700 text-lg break-all font-medium">info@incorpfast.org</p>
             <p className="text-gray-500 text-sm mt-2">We reply within 2-4 business hours</p>
           </div>
 
@@ -59,25 +59,6 @@ export default function ContactPage() {
             </div>
 
             <p className="text-gray-500 text-sm mt-4">India</p>
-          </div>
-
-          {/* Website */}
-          <div className="group bg-white border border-gray-200 rounded-3xl p-8 md:p-10 text-center hover:scale-[1.03] hover:border-purple-400 transition-all duration-300 shadow-sm hover:shadow-purple-100 lg:col-span-1">
-            <div className="w-20 h-20 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:rotate-6 transition-transform">
-              <FaGlobe size={34} />
-            </div>
-            <h3 className="text-2xl font-semibold text-blue-700 mb-2">Visit Our Website</h3>
-            <a 
-              href="https://www.legalpapersindia.com/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-gray-700 text-lg font-medium hover:text-purple-600 transition-colors break-all"
-            >
-www.legalpapersindia.com
-            </a>
-            <p className="text-gray-500 text-sm mt-3">
-              Know more about our services, pricing &amp; process
-            </p>
           </div>
 
         </div>
