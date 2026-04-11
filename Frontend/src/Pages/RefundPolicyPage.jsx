@@ -80,7 +80,7 @@ export default function RefundPolicyPage() {
               <div className="flex gap-4">
                 <span className="text-blue-600 font-bold">1.</span>
                 <p className="text-gray-700 text-sm">
-                  Email us at <span className="text-blue-600">info@incorpfast.in</span> with your Application ID and reason
+                  Email us at <span className="text-blue-600">info@incorpfast.org</span> with your Application ID and reason
                 </p>
               </div>
 

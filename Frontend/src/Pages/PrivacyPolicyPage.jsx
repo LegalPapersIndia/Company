@@ -121,7 +121,7 @@ const PrivacyPolicyPage = () => {
             <div className="flex flex-col md:flex-row gap-6 justify-center items-center text-center md:text-left">
               <div>
                 <p className="font-medium">Email:</p>
-                <p className="text-blue-400">info@yourcompany.com</p>
+                <p className="text-blue-400">info@incorpfast.org</p>
               </div>
               <div>
                 <p className="font-medium">Phone:</p>

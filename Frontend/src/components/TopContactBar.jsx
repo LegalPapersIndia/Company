@@ -24,13 +24,13 @@ const TopContactBar = () => {
           </a>
 
           <a
-            href="mailto:info@incorpfast.in"
+            href="mailto:info@incorpfast.org"
             className="flex items-center gap-2 hover:text-blue-600 transition-colors"
           >
             <span className="w-7 h-7 flex items-center justify-center rounded-md bg-blue-50 text-blue-600">
               <FaEnvelope size={12} />
             </span>
-            info@incorpfast.in
+            info@incorpfast.org
           </a>
 
         </div>
