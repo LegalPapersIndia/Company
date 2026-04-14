@@ -2,14 +2,12 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const states = [
-  "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
-  "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand",
-  "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur",
-  "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab",
-  "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura",
-  "Uttar Pradesh", "Uttarakhand", "West Bengal",
-  "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu",
-  "Delhi", "Jammu and Kashmir", "Ladakh", "Lakshadweep", "Puducherry"
+  "Andaman and Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar",
+  "Chandigarh", "Chhattisgarh", "Dadra and Nagar Haveli and Daman and Diu", "Delhi", "Goa",
+  "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka",
+  "Kerala", "Ladakh", "Lakshadweep", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya",
+  "Mizoram", "Nagaland", "Odisha", "Puducherry", "Punjab", "Rajasthan", "Sikkim",
+  "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"
 ];
 
 const companyTypes = [
@@ -21,33 +19,15 @@ const companyTypes = [
 ];
 
 const natureOfBusinessOptions = [
-  "Manufacturer",
-  "Importers",
-  "Exporters",
-  "Cold Storage",
-  "Wholesaler",
-  "Retailer",
-  "Distributor",
-  "Food Vending Agency",
-  "Supplier",
-  "Caterer",
-  "Dhaba / Food Stall",
-  "Club / Canteen",
-  "Hotel",
-  "Restaurant",
-  "Transporter",
-  "Marketer",
-  "Hawker",
+  "Manufacturer", "Importers", "Exporters", "Cold Storage", "Wholesaler", "Retailer",
+  "Distributor", "Food Vending Agency", "Supplier", "Caterer", "Dhaba / Food Stall",
+  "Club / Canteen", "Hotel", "Restaurant", "Transporter", "Marketer", "Hawker",
   "Petty Retailers of Snacks/ tea shops",
 ];
 
 const initialCapitalOptions = [
-  "₹ 0 - 1 Lakh",
-  "₹ 1 Lakh - 5 Lakhs",
-  "₹ 5 Lakhs - 10 Lakhs",
-  "₹ 10 Lakhs - 25 Lakhs",
-  "₹ 25 Lakhs - 1 Crore",
-  "More than ₹ 1 Crore"
+  "₹ 0 - 1 Lakh", "₹ 1 Lakh - 5 Lakhs", "₹ 5 Lakhs - 10 Lakhs",
+  "₹ 10 Lakhs - 25 Lakhs", "₹ 25 Lakhs - 1 Crore", "More than ₹ 1 Crore"
 ];
 
 const numberOfDirectorsOptions = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"];
@@ -68,8 +48,14 @@ export default function CompanyIncorporationPage() {
     natureOfBusiness: "",
     investment: "₹ 0 - 1 Lakh",
     members: "2",
-    state: "",
+    // Address Fields (GST style)
     address1: "",
+    house_no: "",
+    area_locality: "",
+    city: "",
+    district: "",
+    state: "",
+    pin: "",
   });
 
   const [errors, setErrors] = useState({});
@@ -80,6 +66,9 @@ export default function CompanyIncorporationPage() {
 
     if (name === "mobile") {
       value = value.replace(/\D/g, "").slice(0, 10);
+    }
+    if (name === "pin") {
+      value = value.replace(/\D/g, "").slice(0, 6);
     }
 
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -97,9 +86,13 @@ export default function CompanyIncorporationPage() {
     if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) newErrors.email = "Valid email required";
     if (!formData.natureOfBusiness) newErrors.natureOfBusiness = "Required";
     if (!formData.companyName.trim()) newErrors.companyName = "Required";
-    if (!formData.state) newErrors.state = "Required";
-    if (!formData.address1.trim()) newErrors.address1 = "Required";
+    if (!formData.state) newErrors.state = "State is required";
+    if (!formData.address1.trim()) newErrors.address1 = "Address Line 1 is required";
     if (!formData.members) newErrors.members = "Required";
+
+    if (formData.pin && !/^\d{6}$/.test(formData.pin)) {
+      newErrors.pin = "Pincode must be 6 digits";
+    }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -122,20 +115,27 @@ export default function CompanyIncorporationPage() {
       "ctl00$ContentPlaceHolder1$ddlInitialCapital": formData.investment || "",
       "ctl00$ContentPlaceHolder1$ddlNoOfDirectors": formData.members || "",
 
+      // Address Fields (Same as GST Form)
+      "ctl00$ContentPlaceHolder1$txtAddress1": formData.address1.trim() || "",
+      "ctl00$ContentPlaceHolder1$txtHOUSE": formData.house_no.trim() || "",
+      "ctl00$ContentPlaceHolder1$txtAreaLocality": formData.area_locality.trim() || "",
+      "ctl00$ContentPlaceHolder1$txtCity": formData.city.trim() || "",
+      "ctl00$ContentPlaceHolder1$txtDistrict": formData.district.trim() || "",
       "ctl00$ContentPlaceHolder1$ddlState": formData.state || "",
-      "ctl00$ContentPlaceHolder1$txtHOUSE": formData.address1.trim() || "",
+      "ctl00$ContentPlaceHolder1$txtPin": formData.pin || "",
 
       "ctl00$ContentPlaceHolder1$txtDate": new Date().toISOString().slice(0, 19).replace("T", " "),
     };
 
     try {
-      const API_URL = process.env.VITE_API_BASE_URL;
+      const API_URL = process.env.VITE_API_BASE_URL || "http://localhost:5000";
 
-const res = await fetch(`${API_URL}/api/leads/submit`, {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify(formData),
-});
+      const res = await fetch(`${API_URL}/api/leads/submit`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),   // Better to send payload instead of formData
+      });
+
       if (!res.ok) throw new Error("Failed to save lead");
 
       console.log("✅ Lead saved in MongoDB");
@@ -152,7 +152,7 @@ const res = await fetch(`${API_URL}/api/leads/submit`, {
         console.warn("⚠️ CRM failed but lead saved", crmError);
       }
 
-      sessionStorage.setItem("companySubmittedData", JSON.stringify(formData));
+      sessionStorage.setItem("companySubmittedData", JSON.stringify(payload));
 
       alert("Form submitted successfully!");
       navigate("/payment-summary");
@@ -297,22 +297,8 @@ const res = await fetch(`${API_URL}/api/leads/submit`, {
               </div>
             </div>
 
-            {/* State, Directors & Address */}
+            {/* State, Directors */}
             <div className="grid md:grid-cols-2 gap-6">
-              <div>
-                <label className="text-slate-700 font-medium block mb-2">State *</label>
-                <select 
-                  name="state" 
-                  value={formData.state}
-                  onChange={handleChange}
-                  className={`w-full px-5 py-4 rounded-2xl border bg-white text-slate-900 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 ${errors.state ? "border-red-500" : "border-slate-300"}`}
-                >
-                  <option value="">Select State</option>
-                  {states.map(s => <option key={s} value={s}>{s}</option>)}
-                </select>
-                {errors.state && <p className="text-red-500 text-sm mt-1">{errors.state}</p>}
-              </div>
-
               <div>
                 <label className="text-slate-700 font-medium block mb-2">Number of Directors / Partners / Members *</label>
                 <select 
@@ -326,18 +312,100 @@ const res = await fetch(`${API_URL}/api/leads/submit`, {
                   ))}
                 </select>
               </div>
+
+              <div>
+                <label className="text-slate-700 font-medium block mb-2">State *</label>
+                <select 
+                  name="state" 
+                  value={formData.state}
+                  onChange={handleChange}
+                  className={`w-full px-5 py-4 rounded-2xl border bg-white text-slate-900 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 ${errors.state ? "border-red-500" : "border-slate-300"}`}
+                >
+                  <option value="">Select State</option>
+                  {states.map(s => <option key={s} value={s}>{s}</option>)}
+                </select>
+                {errors.state && <p className="text-red-500 text-sm mt-1">{errors.state}</p>}
+              </div>
             </div>
 
-            <div>
-              <label className="text-slate-700 font-medium block mb-2">Registered Office Address *</label>
-              <input 
-                name="address1" 
-                placeholder="Enter full registered address" 
-                value={formData.address1} 
-                onChange={handleChange}
-                className={`w-full px-5 py-4 rounded-2xl border bg-white text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition ${errors.address1 ? "border-red-500" : "border-slate-300"}`} 
-              />
-              {errors.address1 && <p className="text-red-500 text-sm mt-1">{errors.address1}</p>}
+            {/* ==================== Business Address Section (Same as GST) ==================== */}
+            <div className="space-y-6 bg-gray-50 p-6 rounded-xl border border-gray-200">
+              <label className="block text-lg font-semibold text-gray-800">
+                Registered Office Address (व्यवसाय का पता)
+              </label>
+
+              <div>
+                <label className="text-slate-700 font-medium block mb-2">Address Line 1 *</label>
+                <input 
+                  name="address1" 
+                  placeholder="Flat No. / Shop No. / Building Name / Street" 
+                  value={formData.address1} 
+                  onChange={handleChange}
+                  className={`w-full px-5 py-4 rounded-2xl border bg-white text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition ${errors.address1 ? "border-red-500" : "border-slate-300"}`} 
+                />
+                {errors.address1 && <p className="text-red-500 text-sm mt-1">{errors.address1}</p>}
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <label className="text-slate-700 font-medium block mb-2">House / Shop / Flat No.</label>
+                  <input 
+                    name="house_no" 
+                    placeholder="House / Shop No. / Flat No." 
+                    value={formData.house_no} 
+                    onChange={handleChange}
+                    className="w-full px-5 py-4 rounded-2xl border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600" 
+                  />
+                </div>
+
+                <div>
+                  <label className="text-slate-700 font-medium block mb-2">Area / Locality</label>
+                  <input 
+                    name="area_locality" 
+                    placeholder="Area / Locality / Street / Village" 
+                    value={formData.area_locality} 
+                    onChange={handleChange}
+                    className="w-full px-5 py-4 rounded-2xl border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600" 
+                  />
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div>
+                  <label className="text-slate-700 font-medium block mb-2">City / Town</label>
+                  <input 
+                    name="city" 
+                    placeholder="City / Town" 
+                    value={formData.city} 
+                    onChange={handleChange}
+                    className="w-full px-5 py-4 rounded-2xl border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600" 
+                  />
+                </div>
+
+                <div>
+                  <label className="text-slate-700 font-medium block mb-2">District</label>
+                  <input 
+                    name="district" 
+                    placeholder="District" 
+                    value={formData.district} 
+                    onChange={handleChange}
+                    className="w-full px-5 py-4 rounded-2xl border border-slate-300 bg-white text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600" 
+                  />
+                </div>
+
+                <div>
+                  <label className="text-slate-700 font-medium block mb-2">Pincode</label>
+                  <input 
+                    name="pin" 
+                    placeholder="Pincode" 
+                    value={formData.pin} 
+                    onChange={handleChange}
+                    maxLength={6}
+                    className={`w-full px-5 py-4 rounded-2xl border bg-white text-slate-900 placeholder-slate-400 focus:border-blue-600 focus:ring-1 focus:ring-blue-600 transition ${errors.pin ? "border-red-500" : "border-slate-300"}`} 
+                  />
+                  {errors.pin && <p className="text-red-500 text-sm mt-1">{errors.pin}</p>}
+                </div>
+              </div>
             </div>
 
             {/* Submit Button */}

@@ -12,41 +12,89 @@ function Detail({ label, value }) {
   );
 }
 
+function AddressBlock({ data, isCompany }) {
+  if (!data) return null;
+
+  const getAddress = () => {
+    const lines = [];
+    if (data.address1) lines.push(data.address1);
+    if (data.house_no) lines.push(data.house_no);
+    if (data.area_locality) lines.push(data.area_locality);
+    if (data.city) lines.push(data.city);
+    if (data.district) lines.push(data.district);
+
+    const statePin = [];
+    if (data.state) statePin.push(data.state);
+    if (data.pin) statePin.push(data.pin);
+
+    if (statePin.length > 0) {
+      lines.push(statePin.join(" - "));
+    }
+
+    return lines.length > 0 ? lines.join(", ") : "—";
+  };
+
+  return (
+    <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200 mt-6">
+      <h3 className="text-blue-700 font-semibold mb-4">
+        {isCompany ? "Registered Office Address" : "Business Address"}
+      </h3>
+      <p className="text-gray-700 leading-relaxed text-[15px]">
+        {getAddress()}
+      </p>
+    </div>
+  );
+}
+
 export default function PaymentSummary() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [isCompany, setIsCompany] = useState(false);
+  const [formType, setFormType] = useState(""); // "company" | "gst" | "iec"
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    let saved = sessionStorage.getItem("companySubmittedData");
-    let source = "company";
+    let savedData = null;
+    let source = "";
 
-    if (!saved) {
-      saved = sessionStorage.getItem("iecSubmittedData");
-      source = "iec";
+    // Check Company Incorporation
+    savedData = sessionStorage.getItem("companySubmittedData");
+    if (savedData) {
+      source = "company";
     }
 
-    if (!saved) {
+    // Check GST Registration
+    if (!savedData) {
+      savedData = sessionStorage.getItem("gstSubmittedData");
+      if (savedData) source = "gst";
+    }
+
+    // Check IEC (fallback)
+    if (!savedData) {
+      savedData = sessionStorage.getItem("iecSubmittedData");
+      if (savedData) source = "iec";
+    }
+
+    if (!savedData) {
       setError("No submitted data found. Redirecting...");
       setTimeout(() => navigate("/"), 2000);
       return;
     }
 
     try {
-      const parsed = JSON.parse(saved);
+      const parsed = JSON.parse(savedData);
 
-      const isTooOld =
-        parsed._timestamp &&
-        Date.now() - parsed._timestamp > 45 * 60 * 1000;
-
-      if (isTooOld) throw new Error("Expired");
+      // Optional: Check if data is too old (45 minutes)
+      if (parsed._timestamp && Date.now() - parsed._timestamp > 45 * 60 * 1000) {
+        throw new Error("Expired");
+      }
 
       setData(parsed);
+      setFormType(source);
       setIsCompany(source === "company");
-    } catch {
-      setError("Session expired. Redirecting...");
+    } catch (e) {
+      setError("Session expired or invalid data. Redirecting...");
       setTimeout(() => navigate("/"), 2000);
     }
   }, [navigate]);
@@ -57,8 +105,10 @@ export default function PaymentSummary() {
   };
 
   const handleEdit = () => {
-    if (isCompany) navigate("/company-incorporation");
-    else navigate("/iec-registration");
+    if (formType === "company") navigate("/company-incorporation");
+    else if (formType === "gst") navigate("/gst-registration");
+    else if (formType === "iec") navigate("/iec-registration");
+    else navigate("/");
   };
 
   if (error) {
@@ -76,7 +126,7 @@ export default function PaymentSummary() {
       <div className="min-h-screen flex items-center justify-center bg-white">
         <div className="flex items-center gap-4">
           <div className="h-10 w-10 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-          <p className="text-gray-500">Loading details...</p>
+          <p className="text-gray-500">Loading your details...</p>
         </div>
       </div>
     );
@@ -84,104 +134,128 @@ export default function PaymentSummary() {
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden py-16 px-4">
-
-      {/* Soft Glow */}
+      {/* Background Glows */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-blue-100 blur-[120px] rounded-full"></div>
       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-gray-200 blur-[120px] rounded-full"></div>
 
-      <div className="max-w-5xl mx-auto relative animate-[fadeIn_0.6s_ease]">
+      <div className="max-w-5xl mx-auto relative">
 
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-extrabold bg-gradient-to-r from-blue-600 to-gray-400 bg-clip-text text-transparent">
-            {isCompany ? "Company Incorporation" : "IEC Application"} Summary
+            {formType === "company" 
+              ? "Company Incorporation" 
+              : formType === "gst" 
+                ? "GST Registration" 
+                : "IEC Application"} Summary
           </h1>
           <p className="text-gray-500 mt-2">
-            Review your details before proceeding to payment
+            Please review your details before making payment
           </p>
         </div>
 
-        {/* Card */}
+        {/* Main Card */}
         <div className="bg-white border border-gray-200 rounded-3xl shadow-lg p-8 md:p-10">
 
           <div className="grid md:grid-cols-2 gap-8">
 
-            {/* Left */}
+            {/* Left Column - Basic Details */}
             <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
-              <h3 className="text-blue-700 font-semibold mb-4">Basic Details</h3>
+              <h3 className="text-blue-700 font-semibold mb-4">Basic Information</h3>
 
-              <Detail label="Application Type" value={isCompany ? data.applicationType : data.ddlApplicationType} />
-              <Detail label="Full Name" value={isCompany ? data.fullName : data.txtBusinesEntity} />
-              <Detail label="Email" value={isCompany ? data.email : data.txtemail} />
-              <Detail label="Mobile" value={isCompany ? data.mobile : data.txtphone} />
+              <Detail 
+                label="Application Type" 
+                value={data.applicationType || data["ctl00$ContentPlaceHolder1$ddlApplicationType"] || "—"} 
+              />
+              <Detail 
+                label="Applicant Name" 
+                value={data.fullName || data.applicant_name || data.txtName || "—"} 
+              />
+              <Detail 
+                label="Email" 
+                value={data.email || data["ctl00$ContentPlaceHolder1$txtEmail"] || "—"} 
+              />
+              <Detail 
+                label="Mobile" 
+                value={data.mobile || data["ctl00$ContentPlaceHolder1$txtPhone1"] || "—"} 
+              />
 
-              {isCompany && (
-                <>
-                  <Detail label="Company Name" value={data.companyName} />
-                  <Detail label="Business" value={data.natureOfBusiness} />
-                </>
+              {(formType === "company" || formType === "gst") && (
+                <Detail 
+                  label="Entity / Company Name" 
+                  value={data.companyName || data.entity_name || "—"} 
+                />
               )}
             </div>
 
-            {/* Right */}
+            {/* Right Column - Additional Details */}
             <div className="bg-gray-50 rounded-2xl p-6 border border-gray-200">
-              <h3 className="text-blue-700 font-semibold mb-4">Additional Details</h3>
+              <h3 className="text-blue-700 font-semibold mb-4">Service Details</h3>
 
-              {isCompany ? (
+              {formType === "company" && (
                 <>
-                  <Detail label="Capital" value={data.authorizedCapital} />
-                  <Detail label="Members" value={data.members} />
-                  <Detail label="Investment" value={data.investment} />
-                  <Detail label="State" value={data.state} />
-                  <Detail label="Address" value={data.address1} />
+                  <Detail label="Nature of Business" value={data.natureOfBusiness} />
+                  <Detail label="Initial Capital" value={data.investment} />
+                  <Detail label="No. of Directors/Members" value={data.members} />
                 </>
-              ) : (
+              )}
+
+              {formType === "gst" && (
+                <>
+                  <Detail label="Nature of Business" value={data.nature_of_business} />
+                  <Detail label="Designation" value={data.designation} />
+                  <Detail label="PAN" value={data.pan_number} />
+                </>
+              )}
+
+              {formType === "iec" && (
                 <>
                   <Detail label="PAN" value={data.txtPanNo} />
                   <Detail label="Business Type" value={data.ddlConstitution} />
-                  <Detail label="Activity" value={data.ddlBsinessActivity} />
                 </>
               )}
-            </div>
 
+              <Detail label="State" value={data.state} />
+            </div>
           </div>
+
+          {/* Address Section */}
+          <AddressBlock data={data} isCompany={formType === "company"} />
 
           {/* Payment Section */}
           <div className="mt-12 text-center">
-
             <h3 className="text-2xl text-blue-700 mb-2">
-              {isCompany ? "Registration Fee" : "Processing Fee"}
+              {formType === "company" ? "Company Registration Fee" : "Processing Fee"}
             </h3>
 
             <p className="text-5xl font-extrabold text-blue-600 mb-4">
-              ₹ {isCompany ? "4,999" : "1,950"}
+              ₹ {formType === "company" ? "4,999" : formType === "gst" ? "2,499" : "1,950"}
             </p>
 
             <p className="text-gray-500 mb-8">
-              One-time consultancy fee (Govt. charges extra)
+              One-time consultancy &amp; processing fee (Government fees extra)
             </p>
 
             <button
               onClick={handlePay}
-              className="w-full md:w-auto px-12 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-gray-400 hover:scale-105 active:scale-95 transition-all shadow-md hover:shadow-blue-300 text-white font-semibold"
+              className="w-full md:w-auto px-12 py-4 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-semibold text-lg shadow-lg hover:shadow-blue-300 transition-all active:scale-[0.98]"
             >
               🔒 Pay Securely Now
             </button>
 
             <p className="text-gray-500 text-sm mt-4">
-              Secure payment via Instamojo
+              Secure payment powered by Instamojo
             </p>
 
-            {/* Edit */}
+            {/* Edit Button */}
             <div className="mt-10">
               <button
                 onClick={handleEdit}
-                className="text-gray-500 hover:text-blue-600 transition"
+                className="text-gray-500 hover:text-blue-600 font-medium transition flex items-center gap-2 mx-auto"
               >
-                ← Edit Details
+                ← Edit / Modify Details
               </button>
             </div>
-
           </div>
         </div>
       </div>
